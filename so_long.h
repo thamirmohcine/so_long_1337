@@ -22,6 +22,34 @@
 # include <string.h>
 # include <mlx.h>
 
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
+
+# ifdef __linux__
+#  define KEY_ESC 65307
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_RIGHT 65363
+#  define KEY_LEFT 65361
+#  define KEY_ESC_ALT 9
+#  define KEY_UP_ALT 111
+#  define KEY_DOWN_ALT 116
+#  define KEY_RIGHT_ALT 114
+#  define KEY_LEFT_ALT 113
+# else
+#  define KEY_ESC 53
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_RIGHT 124
+#  define KEY_LEFT 123
+#  define KEY_ESC_ALT 53
+#  define KEY_UP_ALT 126
+#  define KEY_DOWN_ALT 125
+#  define KEY_RIGHT_ALT 124
+#  define KEY_LEFT_ALT 123
+# endif
+
 typedef struct s_game
 {
 	void	*win;

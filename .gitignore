@@ -1,0 +1,11 @@
+# Build artifacts
+*.o
+so_long
+
+# OS/editor files
+.DS_Store
+*.swp
+*.swo
+
+# Local environment
+.vscode/

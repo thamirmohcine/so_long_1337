@@ -35,20 +35,15 @@ void	render_images(t_game *game, int i, int j)
 	x = j * 50;
 	y = i * 50;
 	if (game->map_l[i][j] == '1')
-		if (!mlx_put_image_to_window(game->mlx, game->win, game->wall, x, y))
-			error_handling(game, "invalid iamge\n");
+		mlx_put_image_to_window(game->mlx, game->win, game->wall, x, y);
 	if (game->map_l[i][j] != '1')
-		if (!mlx_put_image_to_window(game->mlx, game->win, game->b_g, x, y))
-			error_handling(game, "invalid iamge\n");
+		mlx_put_image_to_window(game->mlx, game->win, game->b_g, x, y);
 	if (game->map_l[i][j] == 'C')
-		if (!mlx_put_image_to_window(game->mlx, game->win, game->coin, x, y))
-			error_handling(game, "invalid iamge\n");
+		mlx_put_image_to_window(game->mlx, game->win, game->coin, x, y);
 	if (game->map_l[i][j] == 'P')
-		if (!mlx_put_image_to_window(game->mlx, game->win, game->player, x, y))
-			error_handling(game, "invalid iamge\n");
+		mlx_put_image_to_window(game->mlx, game->win, game->player, x, y);
 	if (game->map_l[i][j] == 'E')
-		if (!mlx_put_image_to_window(game->mlx, game->win, game->exit, x, y))
-			error_handling(game, "invalid iamge\n");
+		mlx_put_image_to_window(game->mlx, game->win, game->exit, x, y);
 }
 
 void	creat_window(t_game *game)
@@ -76,7 +71,8 @@ void	creat_window(t_game *game)
 		}
 		i++;
 	}
-	mlx_loop_hook(game->mlx, ft_loop, game);
+	mlx_hook(game->win, 17, 0, x_click, game);
+	mlx_hook(game->win, 2, 1L << 0, move, game);
 	mlx_loop(game->mlx);
 }
 

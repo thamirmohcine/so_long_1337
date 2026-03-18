@@ -12,13 +12,80 @@ The program loads a `.ber` map, validates it, renders the level, and lets the pl
 - **make**
 - **MiniLibX (mlx)**
 
-> Current `Makefile` linker flags are:
-> `-lmlx -framework OpenGL -framework AppKit`
+### Native build (auto OS detection)
+The Makefile now auto-detects your OS:
+- **Linux**: uses local `mlx_linux/`, builds MLX automatically, and links with X11.
+- **macOS**: keeps framework-based MiniLibX linking.
+
+Linux packages (Debian/Ubuntu):
+```bash
+sudo apt update
+sudo apt install build-essential make libx11-dev libxext-dev zlib1g-dev git
+```
+
+`mlx_linux/` is managed as a git submodule.
+
+If you clone this repo for the first time:
+```bash
+git clone --recurse-submodules https://github.com/thamirmohcine/so_long_1337
+```
+
+If you already cloned without submodules:
+```bash
+git submodule update --init --recursive
+```
 
 ### Build
 ```bash
 make
 ```
+
+### Docker guide (recommended for all users)
+
+This project includes Docker support directly in the `Makefile`.
+
+#### 1) Build image
+```bash
+make docker-build
+```
+
+#### 2) Run game (default map)
+```bash
+make docker-run
+```
+
+#### 3) Run a specific map
+```bash
+make docker-run-map MAP=maps/map_1.ber
+```
+
+#### 4) Rebuild image from scratch (after code/texture changes)
+```bash
+make docker-rebuild
+```
+
+#### 5) Remove image (optional)
+```bash
+make docker-clean
+```
+
+### Docker prerequisites
+- Docker installed and daemon running.
+- X11 display available on host.
+- `xhost` available (used automatically by `docker-run` and `docker-run-map`).
+
+### Direct Docker commands (manual alternative)
+```bash
+docker build -t so_long_1337 .
+xhost +local:docker
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro so_long_1337
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro so_long_1337 ./so_long maps/map_1.ber
+```
+
+### Troubleshooting Docker run
+- If changes do not appear, rebuild image: `make docker-rebuild`.
+- If GUI does not open, ensure host X server is active and `DISPLAY` is set.
+- If keyboard does not work, click once inside the game window to focus it.
 
 ### Clean / Rebuild
 ```bash

@@ -104,9 +104,7 @@ void	check_map_extention(char *filename)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int		i;
 
-	i = 0;
 	if (ac != 2)
 		return (ft_printf("usage: ./a.out filename.ber\n"), 1);
 	check_map_extention(av[1]);

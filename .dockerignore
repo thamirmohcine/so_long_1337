@@ -1,0 +1,7 @@
+.git
+mlx_linux
+*.o
+so_long
+*.swp
+*.swo
+.DS_Store
